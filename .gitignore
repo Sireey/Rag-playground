@@ -1,0 +1,24 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Secrets
+.env
+
+# Vector index (large binary files, rebuild with --ingest)
+chroma_db/
+
+# Data (PDFs may be large or licensed)
+data/raw/
+data/processed/
+
+# IDE
+.vscode/
+.idea/
+
+# Claude
+.claude/

@@ -1,0 +1,13 @@
+pypdf==4.3.1
+pdfplumber==0.11.4
+langchain==0.2.16
+langchain-community==0.2.16
+chromadb==0.5.15
+sentence-transformers==3.1.1
+ragas==0.1.21
+python-dotenv==1.0.1
+rich==13.7.1   
+langchain-openai==0.1.23
+pymupdf==1.24.9
+tiktoken==0.7.0
+sentence-transformers==3.1.1

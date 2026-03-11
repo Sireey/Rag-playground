@@ -1,0 +1,28 @@
+# configs/default.yaml — full pipeline: rerank + multi-query
+
+ssl_patch: true
+
+llm:
+  model: gpt-4o-mini
+  temperature: 0
+
+embedder:
+  model: text-embedding-3-small
+
+parser:
+  type: pymupdf
+  clean: true
+
+retriever:
+  type: rerank
+  chroma_dir: ./chroma_db
+  collection_name: rag_papers
+  k_retrieve: 10
+  k_final: 3
+  cross_encoder_model: cross-encoder/ms-marco-MiniLM-L-6-v2
+  multi_query: true
+  multi_query_variants: 3
+  chunker:
+    type: recursive_token
+    chunk_size: 512
+    chunk_overlap: 50

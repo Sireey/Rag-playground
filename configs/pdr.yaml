@@ -1,0 +1,39 @@
+# configs/pdr.yaml — Parent-Document Retriever
+#
+# WHY two chunk sizes?
+#   child_chunker (128 tokens): small, precise — used for retrieval.
+#     The query embedding matches a tight, focused piece of text.
+#   parent_chunker (512 tokens): large, rich — returned to the LLM.
+#     The LLM gets full context around the matched passage.
+#
+# Use a separate collection_name from the rerank/baseline pipelines
+# so the child chunk index doesn't collide with the full-size chunk index.
+# Run with --ingest the first time to build both the ChromaDB index and
+# the parent docstore (chroma_db/parents_rag_papers_pdr.json).
+
+ssl_patch: true
+
+llm:
+  model: gpt-4o-mini
+  temperature: 0
+
+embedder:
+  model: text-embedding-3-small
+
+parser:
+  type: pymupdf
+  clean: true
+
+retriever:
+  type: parent_document
+  chroma_dir: ./chroma_db
+  collection_name: rag_papers_pdr
+  k: 3
+  child_chunker:
+    type: recursive_token
+    chunk_size: 128
+    chunk_overlap: 20
+  parent_chunker:
+    type: recursive_token
+    chunk_size: 512
+    chunk_overlap: 0

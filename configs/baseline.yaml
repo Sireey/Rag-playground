@@ -1,0 +1,24 @@
+# configs/baseline.yaml — vector similarity only, no reranking
+
+ssl_patch: true
+
+llm:
+  model: gpt-4o-mini
+  temperature: 0
+
+embedder:
+  model: text-embedding-3-small
+
+parser:
+  type: pymupdf
+  clean: true
+
+retriever:
+  type: chroma
+  chroma_dir: ./chroma_db
+  collection_name: rag_papers
+  k_final: 3
+  chunker:
+    type: recursive_token
+    chunk_size: 512
+    chunk_overlap: 50
